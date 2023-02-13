@@ -10,32 +10,36 @@ const savedDataObject = JSON.parse(savedValues);
 
 let formData = {};
 
-reloadPage();
-
 form.addEventListener("submit", onFormSubmit);
 form.addEventListener("input", throttle(storageFormData, 500));
 
-function storageFormData(e) { 
+reloadPage();
+
+function storageFormData(e) {
     formData[e.target.name] = e.target.value;
-    localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(formData));
-    console.log(formData)
-    
+  localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(formData));
 };
 
 function onFormSubmit(e) {
     e.preventDefault();
-    const savedDatas = localStorage.getItem(LOCALSTORAGE_KEY);
-    console.log(JSON.parse(savedDatas));
+   if (email.value === "" || message.value === "") {
+           return alert(`Всі поля повинні бути заповнені!`);
+  }
+  
+    const savedDatas = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY));
+  console.log(savedDatas);
     
     e.currentTarget.reset();
-    localStorage.removeItem(LOCALSTORAGE_KEY);
+  localStorage.removeItem(LOCALSTORAGE_KEY);
     formData = {};
 };
 
 function reloadPage() {
      if (savedValues) {
-   email.value = savedDataObject.email || '';
-    message.value = savedDataObject.message || '';
+       email.value = savedDataObject.email || '';
+       message.value = savedDataObject.message || '';
   }
+  
 };
+
 
