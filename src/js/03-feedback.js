@@ -17,7 +17,7 @@ function onFormSubmit(e) {
   e.preventDefault();
   
   if (email.value === "" || message.value === "") {
-      return alert(`Всі поля повинні бути заповнені!`);
+      return alert(`Всі поля повинні бути заповнені, козаче!`);
   }
 
   const result = localStorage.getItem(LOCALSTORAGE_KEY);
